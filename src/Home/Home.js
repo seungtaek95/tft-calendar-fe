@@ -4,7 +4,12 @@ function Home() {
   const summonerNameInputRef = useRef(null);
   
   const searchSummoner = () => {
-    window.location.href = `/summoner/${summonerNameInputRef.current.value}`;
+    const summonerName = summonerNameInputRef.current.value;
+    if (!summonerName) {
+      return alert("소환사명을 입력하세요!");
+    }
+
+    window.location.href = `/summoner/${summonerName}`;
   }
 
   return (
