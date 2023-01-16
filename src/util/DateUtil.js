@@ -1,4 +1,4 @@
-export class DateUtil {
+export default class DateUtil {
   constructor(year, month) {
     if (year && month !== null) {
       this.currentDate = new Date(year, month, 1);

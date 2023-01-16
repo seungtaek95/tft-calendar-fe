@@ -1,10 +1,11 @@
-import { DateUtil } from "../util/DateUtil";
+import DateUtil from "../util/DateUtil";
+import DateTableBody from "./DateTableBody";
 import NextButton from "./NextButton";
 import PrevButton from "./PrevButton";
 
 const dateTexts = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function Calendar({ year, month, onClickPrev, onClickNext }) {
+function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOfMonth }) {
   const now = new DateUtil(year, month);
   const lastDayOfMonth = now.lastDayOfMonth;
 
@@ -13,8 +14,8 @@ function Calendar({ year, month, onClickPrev, onClickNext }) {
     let dayOfMonth = 1;
 
     // 주별로
-    for (let week = 1; week <= 5; week++) {
-      if (dayOfMonth > lastDayOfMonth) { // 2월은 4주만 있는 경우가 있기 때문에
+    for (let week = 1; week <= 6; week++) {
+      if (dayOfMonth > lastDayOfMonth) {
         return elems;
       }
 
@@ -24,15 +25,15 @@ function Calendar({ year, month, onClickPrev, onClickNext }) {
       for (let day = 0; day < 7; day++) {
         if (week === 1) { // 첫째 주
           if (day >= now.firstDay) {
-            tds.push(<td key={`${week}-${day}`}>{dayOfMonth++}</td>);
+            tds.push(<DateTableBody key={`${week}-${day}`} dayOfMonth={dayOfMonth} dailyMatchStat={dailyMatchStatByDayOfMonth[dayOfMonth++]} />);
           } else {
-            tds.push(<td key={`${week}-${day}`}></td>)
+            tds.push(<DateTableBody key={`${week}-${day}`} />)
           }
         } else {
           if (dayOfMonth <= lastDayOfMonth) {
-            tds.push(<td key={`${week}-${day}`}>{dayOfMonth++}</td>);
+            tds.push(<DateTableBody key={`${week}-${day}`} dayOfMonth={dayOfMonth} dailyMatchStat={dailyMatchStatByDayOfMonth[dayOfMonth++]} />);
           } else {
-            tds.push(<td key={`${week}-${day}`}></td>);
+            tds.push(<DateTableBody key={`${week}-${day}`} />);
           }
         }
       }

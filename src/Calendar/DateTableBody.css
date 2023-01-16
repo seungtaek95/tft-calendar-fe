@@ -1,0 +1,8 @@
+.calendarCell {
+  width: 100px;
+  height: 80px;
+}
+
+.calendarCellDayText {
+  padding: 10px;
+}

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import { getMatchStatBySummonerName } from "../api/match-stat/match-stat-api";
+import { getMonthlyMatchStat } from "../api/match-stat/match-stat-api";
 import Calendar from "../Calendar/Calendar";
+import { getSumPlaytimeText } from "../util/StatUtil";
 
 const now = new Date();
 
@@ -13,15 +14,31 @@ function Summoner() {
 
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
+  const [monthlyMatchStat, setMonthlyMatchStat] = useState(null);
+  const [monthlySumPlaytime, setMonthlySumPlaytime] = useState(0);
+  const [dailyMatchStatByDayOfMonth, setDailyMatchStatByDayOfMonth] = useState(null);
 
-  getMatchStatBySummonerName(summonerName)
-    .then(matchStat => {
-      setIsLoading(false);
-    })
-    .catch(() => {
-      setIsLoading(false);
-      setIsFailed(true);
-    });
+  useEffect(() => {
+    getMonthlyMatchStat(summonerName, year, month + 1)
+      .then(monthlyMatchStat => {
+        setIsLoading(false);
+        setMonthlyMatchStat(monthlyMatchStat);
+        setDailyMatchStatByDayOfMonth(
+          monthlyMatchStat.dailyMatchStats.reduce((dailyMatchStatByDayOfMonth, dailyMatchStat) => {
+            dailyMatchStatByDayOfMonth[dailyMatchStat.dayOfMonth] = dailyMatchStat;
+            return dailyMatchStatByDayOfMonth;
+          }, {})
+        );
+        setMonthlySumPlaytime(
+          monthlyMatchStat.dailyMatchStats.reduce((acc, dailyMatchStat) => acc += dailyMatchStat.playtimeInSeconds, 0)
+        );
+      })
+      .catch((e) => {
+        console.error(e);
+        setIsLoading(false);
+        setIsFailed(true);
+      });
+  }, [year, month]);
   
   const onClickPrev = () => {
     now.setMonth(now.getMonth() - 1);
@@ -38,11 +55,21 @@ function Summoner() {
   return (
     <div>
       <div>
-        {summonerName}
+        쨍 이
       </div>
       {isLoading && <div>Loading...</div>}
       {isFailed && <div>사용자 정보를 가져오는데 실패했습니다.</div>}
-      {!isLoading && !isFailed && <Calendar year={year} month={month} onClickPrev={onClickPrev} onClickNext={onClickNext} />}
+      {!isLoading && !isFailed && (
+        <div>
+          <div>이달의 날려버린 시간: {getSumPlaytimeText(monthlySumPlaytime)}</div>
+          <Calendar
+            year={year}
+            month={month}
+            onClickPrev={onClickPrev}
+            onClickNext={onClickNext}
+            dailyMatchStatByDayOfMonth={dailyMatchStatByDayOfMonth} />
+        </div>
+      )}
     </div>
   );
 }
