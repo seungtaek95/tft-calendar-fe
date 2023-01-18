@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { getRgbString } from '../util/StatUtil';
 import DailyStatTooltip from './DailyStatTooltip';
 import './DateTableBody.css'; 
 
-function DateTableBody({ dayOfMonth, dailyMatchStat }) {
+function DateTableBody({ dayOfMonth, dailyMatchStatView }) {
   const [showTooltip, setShowTooltip] = useState(false);
   const style = {
-    background: dailyMatchStat ? getRgbString(dailyMatchStat.playtimeInSeconds) : "#FFFFFF"
+    background: dailyMatchStatView ? dailyMatchStatView.rgbString : "#FFFFFF"
   }
 
   return (
@@ -14,7 +13,7 @@ function DateTableBody({ dayOfMonth, dailyMatchStat }) {
       <div className='calendarCell' onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
         <div className='calendarCellDayText'>{dayOfMonth}</div>
       </div>
-      { dailyMatchStat && <DailyStatTooltip show={showTooltip} dailyMatchStat={dailyMatchStat} />}
+      { dailyMatchStatView && <DailyStatTooltip show={showTooltip} dailyMatchStatView={dailyMatchStatView} />}
     </td>
   )
 }

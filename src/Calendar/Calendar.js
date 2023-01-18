@@ -1,4 +1,5 @@
 import DateUtil from "../util/DateUtil";
+import * as StatUtil from "../util/StatUtil";
 import DateTableBody from "./DateTableBody";
 import NextButton from "./NextButton";
 import PrevButton from "./PrevButton";
@@ -25,13 +26,15 @@ function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOf
       for (let day = 0; day < 7; day++) {
         if (week === 1) { // 첫째 주
           if (day >= now.firstDay) {
-            tds.push(<DateTableBody key={`${week}-${day}`} dayOfMonth={dayOfMonth} dailyMatchStat={dailyMatchStatByDayOfMonth[dayOfMonth++]} />);
+            const dailyMatchStat = dailyMatchStatByDayOfMonth[dayOfMonth++];
+            tds.push(<DateTableBody key={`${week}-${day}`} dayOfMonth={dayOfMonth} dailyMatchStatView={dailyMatchStat && StatUtil.getDailyMatchStatView(dailyMatchStat)} />);
           } else {
             tds.push(<DateTableBody key={`${week}-${day}`} />)
           }
         } else {
           if (dayOfMonth <= lastDayOfMonth) {
-            tds.push(<DateTableBody key={`${week}-${day}`} dayOfMonth={dayOfMonth} dailyMatchStat={dailyMatchStatByDayOfMonth[dayOfMonth++]} />);
+            const dailyMatchStat = dailyMatchStatByDayOfMonth[dayOfMonth++];
+            tds.push(<DateTableBody key={`${week}-${day}`} dayOfMonth={dayOfMonth} dailyMatchStatView={dailyMatchStat && StatUtil.getDailyMatchStatView(dailyMatchStat)} />);
           } else {
             tds.push(<DateTableBody key={`${week}-${day}`} />);
           }

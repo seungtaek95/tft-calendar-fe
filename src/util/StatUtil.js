@@ -43,3 +43,12 @@ export function getSumPlaytimeText(sumPlaytimeInSeconds) {
 
   return resultString;
 }
+
+export function getDailyMatchStatView(dailyMatchStat) {
+  return {
+    rgbString: getRgbString(dailyMatchStat.playtimeInSeconds),
+    playedGameCount: dailyMatchStat.playedGameCount,
+    sumPlaytimeInSeconds: getSumPlaytimeText(dailyMatchStat.playtimeInSeconds),
+    averagePlacement: parseFloat(dailyMatchStat.averagePlacement.toFixed(2)),
+  }
+}
