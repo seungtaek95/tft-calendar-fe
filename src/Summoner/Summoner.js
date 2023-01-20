@@ -1,104 +1,56 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import { getMonthlyMatchStat } from "../api/match-stat/match-stat-api";
 import { searchSummoner } from "../api/summoner/summoner-api";
-import Calendar from "../Calendar/Calendar";
-import { getLastFetchedAtText, getSumPlaytimeText } from "../util/StatUtil";
+import Header from "../Header/Header";
+import SummonerInfo from "./SummonerInfo";
+import SummonerStat from "./SummonerStat";
 
-const now = new Date();
-
-function Summoner() {
+function Summoner() {  
   const { summonerName } = useParams();
+  const [lastFetchedAt, setLastFetchedAt] = useState(null);
+
   const [isLoading, setIsLoading] = useState(true);
   const [isFailed, setIsFailed] = useState(false);
 
-  const [isNew, setIsNew] = useState(false);
-  const [lastFetchedAt, setLastFetchedAt] = useState(null);
-
-  const [year, setYear] = useState(now.getFullYear());
-  const [month, setMonth] = useState(now.getMonth());
-  const [monthlyMatchStat, setMonthlyMatchStat] = useState(null);
-  const [monthlySumPlaytime, setMonthlySumPlaytime] = useState(0);
-  const [dailyMatchStatByDayOfMonth, setDailyMatchStatByDayOfMonth] = useState(null);
-
   useEffect(() => {
-    async function init() {
+    async function fetchSummoner() {
       const searchSummonerResponse = await searchSummoner(summonerName);
-
-      if (searchSummonerResponse.isNew) {
-        setIsLoading(false);
-        setIsNew(true);
-        return;
-      }
-
-      const monthlyMatchStat = await getMonthlyMatchStat(summonerName, year, month + 1);
-
       setIsLoading(false);
-      setIsNew(false);
-      setLastFetchedAt(new Date(searchSummonerResponse.summonerView.lastFetchedAt));
-      setMonthlyMatchStat(monthlyMatchStat);
-      setMonthlySumPlaytime(
-        monthlyMatchStat.dailyMatchStats.reduce((acc, dailyMatchStat) => acc += dailyMatchStat.playtimeInSeconds, 0)
-      );
-      setDailyMatchStatByDayOfMonth(
-        monthlyMatchStat.dailyMatchStats.reduce((dailyMatchStatByDayOfMonth, dailyMatchStat) => {
-          dailyMatchStatByDayOfMonth[dailyMatchStat.dayOfMonth] = dailyMatchStat;
-          return dailyMatchStatByDayOfMonth;
-        }, {})
-      );
+
+      if (searchSummonerResponse.summonerView.lastFetchedAt) {
+        setLastFetchedAt(new Date(searchSummonerResponse.summonerView.lastFetchedAt));
+      }
     }
 
-    init()
+    fetchSummoner()
       .catch(e => {
         console.error(e);
         setIsLoading(false);
         setIsFailed(true);
       });
-  }, [year, month]);
-  
-  const onClickPrev = () => {
-    now.setMonth(now.getMonth() - 1);
-    setYear(now.getFullYear());
-    setMonth(now.getMonth());
-    setIsLoading(true);
-    setDailyMatchStatByDayOfMonth(null);
-  }
+  }, []);
 
-  const onClickNext = () => {
-    now.setMonth(now.getMonth() + 1);
-    setYear(now.getFullYear());
-    setMonth(now.getMonth());
-    setIsLoading(true);
-    setDailyMatchStatByDayOfMonth(null);
+  if (isLoading || isFailed) {
+    return (
+      <div>
+        <Header />
+        {isLoading && <div>Loading...</div>}
+        {isFailed && (
+          <div>
+            <p>소환사 정보를 가져오는데 실패했습니다ㅠ</p>
+            <p>{summonerName}</p>
+          </div>
+        )}
+      </div>
+    );
   }
 
   return (
     <div>
-      <div>
-        {summonerName}
-      </div>
-      {isLoading && <div>Loading...</div>}
-      {isFailed && <div>사용자 정보를 가져오는데 실패했습니다.</div>}
-      {!isLoading && !isFailed && isNew && (
-        <div>신규 소환사입니다!</div>
-      )}
-      {!isLoading && !isFailed && monthlyMatchStat && (
-        <div>
-          <div>
-            <button>통계 갱신</button> 마지막 갱신: {getLastFetchedAtText(lastFetchedAt)}
-          </div>
-          <div>
-            <div>이달의 날려버린 시간: {getSumPlaytimeText(monthlySumPlaytime)}</div>
-            <Calendar
-              year={year}
-              month={month}
-              onClickPrev={onClickPrev}
-              onClickNext={onClickNext}
-              dailyMatchStatByDayOfMonth={dailyMatchStatByDayOfMonth} />
-          </div>
-        </div>
-      )}
+      <Header />
+      <SummonerInfo summonerName={summonerName} lastFetchedAt={lastFetchedAt} />
+      <SummonerStat summonerName={summonerName} lastFetchedAt={lastFetchedAt} />
     </div>
   );
 }
