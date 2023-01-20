@@ -12,36 +12,28 @@ function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOf
 
   const renderCalendarBody = () => {
     const elems = [];
-    let dayOfMonth = 1;
+    let dayOfMonth = 1 - now.firstDay;
 
     // 주별로
     for (let week = 1; week <= 6; week++) {
-      if (dayOfMonth > lastDayOfMonth) {
-        return elems;
-      }
-
       const tds = [];
 
       // 요일별로
       for (let day = 0; day < 7; day++) {
-        if (week === 1) { // 첫째 주
-          if (day >= now.firstDay) {
-            const dailyMatchStat = dailyMatchStatByDayOfMonth[dayOfMonth++];
-            tds.push(<DateTableBody key={`${week}-${day}`} dayOfMonth={dayOfMonth} dailyMatchStatView={dailyMatchStat && StatUtil.getDailyMatchStatView(dailyMatchStat)} />);
-          } else {
-            tds.push(<DateTableBody key={`${week}-${day}`} />)
-          }
+        if (1 <= dayOfMonth && dayOfMonth <= lastDayOfMonth) {
+          const dailyMatchStat = dailyMatchStatByDayOfMonth && dailyMatchStatByDayOfMonth[dayOfMonth];
+          tds.push(<DateTableBody key={`${month}-${week}-${day}`} dayOfMonth={dayOfMonth} dailyMatchStatView={dailyMatchStat && StatUtil.getDailyMatchStatView(dailyMatchStat)} />);
         } else {
-          if (dayOfMonth <= lastDayOfMonth) {
-            const dailyMatchStat = dailyMatchStatByDayOfMonth[dayOfMonth++];
-            tds.push(<DateTableBody key={`${week}-${day}`} dayOfMonth={dayOfMonth} dailyMatchStatView={dailyMatchStat && StatUtil.getDailyMatchStatView(dailyMatchStat)} />);
-          } else {
-            tds.push(<DateTableBody key={`${week}-${day}`} />);
-          }
+          tds.push(<DateTableBody key={`${month}-${week}-${day}`} />);
         }
+        dayOfMonth++;
       }
 
       elems.push(<tr key={`${month}-${week}`}>{tds}</tr>);
+
+      if (dayOfMonth > lastDayOfMonth) {
+        break;
+      }
     }
 
     return elems;

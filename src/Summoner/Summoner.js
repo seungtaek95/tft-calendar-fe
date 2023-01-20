@@ -44,12 +44,16 @@ function Summoner() {
     now.setMonth(now.getMonth() - 1);
     setYear(now.getFullYear());
     setMonth(now.getMonth());
+    setIsLoading(true);
+    setDailyMatchStatByDayOfMonth(null);
   }
 
   const onClickNext = () => {
     now.setMonth(now.getMonth() + 1);
     setYear(now.getFullYear());
     setMonth(now.getMonth());
+    setIsLoading(true);
+    setDailyMatchStatByDayOfMonth(null);
   }
 
   return (

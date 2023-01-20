@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost/api/match-stat";
+const baseUrl = "http://localhost/api/match-stats";
 
 export async function getMonthlyMatchStatBySummonerName(summonerName) {
   const today = new Date();
