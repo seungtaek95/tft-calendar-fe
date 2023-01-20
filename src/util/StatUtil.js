@@ -1,9 +1,12 @@
+const ONE_MINUTE = 60;
 const ONE_HOUR = 3_600;
 const TWO_HOUR = 7_200;
 const THREE_HOUR = 10_800;
 const FOUR_HOUR = 14_400;
 const FIVE_HOUR = 18_000;
 const SIX_HOUR = 21_600;
+const ONE_DAY = 86_400;
+const THIRTY_DAY = 2_592_000;
 
 export function getRgbString(playtimeInSeconds) {
   if (playtimeInSeconds === 0) {
@@ -50,5 +53,27 @@ export function getDailyMatchStatView(dailyMatchStat) {
     playedGameCount: dailyMatchStat.playedGameCount,
     sumPlaytimeInSeconds: getSumPlaytimeText(dailyMatchStat.playtimeInSeconds),
     averagePlacement: parseFloat(dailyMatchStat.averagePlacement.toFixed(2)),
+  }
+}
+
+export function getLastFetchedAtText(lastFetchedAt) {
+  const lastFetchedAtInMillis = lastFetchedAt.getTime();
+  const nowInMillis = new Date().getTime();
+  
+  const offset = Math.ceil((nowInMillis - lastFetchedAtInMillis) / 1000);
+
+  if (offset < ONE_MINUTE) {
+    return `몇 초 전`;
+  } else if (offset < ONE_HOUR) {
+    const offsetInMinute = parseFloat(Math.floor(offset / ONE_MINUTE));
+    return `${offsetInMinute}분 전`;
+  } else if (offset < ONE_DAY) {
+    const offsetInHour = parseFloat(Math.floor(offset / ONE_HOUR));
+    return `${offsetInHour}시간 전`;
+  } else if (offset < THIRTY_DAY) {
+    const offsetInDay = parseFloat(Math.floor(offset / ONE_DAY));
+    return `${offsetInDay}일 전`;
+  } else {
+    return `한 달 이상`;
   }
 }

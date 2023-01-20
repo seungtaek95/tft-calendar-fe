@@ -12,9 +12,15 @@ function Home() {
     window.location.href = `/summoner/${summonerName}`;
   }
 
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      searchSummoner();
+    }
+  }
+
   return (
     <div>
-      <input ref={summonerNameInputRef} type="text"/>
+      <input ref={summonerNameInputRef} onKeyDown={onKeyDown} type="text"/>
       <button onClick={searchSummoner}>검색</button>
     </div>
   );
