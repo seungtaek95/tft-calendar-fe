@@ -15,11 +15,11 @@ function Summoner() {
 
   useEffect(() => {
     async function fetchSummoner() {
-      const searchSummonerResponse = await searchSummoner(summonerName);
+      const summonerView = await searchSummoner(summonerName);
       setIsLoading(false);
 
-      if (searchSummonerResponse.summonerView.lastFetchedAt) {
-        setLastFetchedAt(new Date(searchSummonerResponse.summonerView.lastFetchedAt));
+      if (summonerView.lastFetchedAt) {
+        setLastFetchedAt(new Date(summonerView.lastFetchedAt));
       }
     }
 
