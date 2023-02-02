@@ -8,12 +8,24 @@ function DateTableBody({ dayOfMonth, dailyMatchStatView }) {
     background: dailyMatchStatView ? dailyMatchStatView.rgbString : "#FFFFFF"
   }
 
+  const onMouseEnter = () => {
+    if (dailyMatchStatView) {
+      setShowTooltip(true);
+    }
+  }
+
+  const onMouseLeave = () => {
+    if (showTooltip) {
+      setShowTooltip(false);
+    }
+  }
+
   return (
     <td className='calendarCellContainer' style={style}>
-      <div className='calendarCell' onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
+      <div className='calendarCell' onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
         <div className='calendarCellDayText'>{dayOfMonth}</div>
       </div>
-      { dailyMatchStatView && <DailyStatTooltip show={showTooltip} dailyMatchStatView={dailyMatchStatView} />}
+      {dailyMatchStatView && <DailyStatTooltip show={showTooltip} dailyMatchStatView={dailyMatchStatView} />}
     </td>
   )
 }
