@@ -5,27 +5,45 @@ const THREE_HOUR = 10_800;
 const FOUR_HOUR = 14_400;
 const FIVE_HOUR = 18_000;
 const SIX_HOUR = 21_600;
+const EIGHT_HOUR = 28_800;
 const ONE_DAY = 86_400;
 const THIRTY_DAY = 2_592_000;
 
 export function getRgbString(playtimeInSeconds) {
+  // if (playtimeInSeconds === 0) {
+  //   return "#171722";
+  // } else if (playtimeInSeconds < ONE_HOUR) {
+  //   return "#FFCCCC";
+  // } else if (playtimeInSeconds < TWO_HOUR) {
+  //   return "#FF9999";
+  // } else if (playtimeInSeconds < THREE_HOUR) {
+  //   return "#FF6666";
+  // } else if (playtimeInSeconds < FOUR_HOUR) {
+  //   return "#FF3333";
+  // } else if (playtimeInSeconds < FIVE_HOUR) {
+  //   return "#FF0000";
+  // } else if (playtimeInSeconds < SIX_HOUR) {
+  //   return "CC0000";
+  // }
   if (playtimeInSeconds === 0) {
-    return "#FFFFFF";
+    return "#202020";
   } else if (playtimeInSeconds < ONE_HOUR) {
-    return "#FFCCCC";
+    return "#440000";
   } else if (playtimeInSeconds < TWO_HOUR) {
-    return "#FF9999";
+    return "#660011";
   } else if (playtimeInSeconds < THREE_HOUR) {
-    return "#FF6666";
+    return "#991122";
   } else if (playtimeInSeconds < FOUR_HOUR) {
-    return "#FF3333";
+    return "#AA2233";
   } else if (playtimeInSeconds < FIVE_HOUR) {
-    return "#FF0000";
+    return "#BB4455";
   } else if (playtimeInSeconds < SIX_HOUR) {
-    return "CC0000";
+    return "CC5566";
+  } else if (playtimeInSeconds < EIGHT_HOUR) {
+    return "#FF7788"
   }
 
-  return "#990000";
+  return "#FF99AA";
 }
 
 export function getSumPlaytimeText(sumPlaytimeInSeconds) {

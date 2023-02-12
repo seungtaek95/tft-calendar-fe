@@ -1,0 +1,40 @@
+.summoner_info_container {
+  display: flex;
+  height: 120px;
+  background-color: #202020;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.summoner_info_profile_icon_img {
+  height: 100%;
+  width: auto;
+  border-radius: 20px;
+}
+
+.summoner_info_name_renew_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.summoner_info_name_text {
+  font-size: 40px;
+}
+
+.renew_button {
+  height: 40px;
+  width: 80px;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #AA2233;
+  border: none;
+  color: white;
+}
+
+.renew_button:hover {
+  background-color: #991122;
+}

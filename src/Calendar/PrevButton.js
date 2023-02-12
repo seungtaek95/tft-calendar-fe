@@ -1,6 +1,8 @@
+import './PrevButton.css';
+
 function PrevButton({ onClick }) {
   return (
-    <button onClick={onClick}>&lt;</button>
+    <button className="prev_button" onClick={onClick}>&lt;</button>
   )
 }
 

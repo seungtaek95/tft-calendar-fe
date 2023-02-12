@@ -1,3 +1,5 @@
+import './SummonerStat.css';
+
 import { useEffect, useState } from "react";
 
 import Calendar from "../Calendar/Calendar";
@@ -70,20 +72,22 @@ function SummonerStat({ summonerView }) {
   }
 
   return (
-    <div>
+    <>
       {!summonerView.lastFetchedAt && <div>통계정보가 없는 소환사입니다!</div>}
       {summonerView.lastFetchedAt && (
-        <div>
-          <div>이달의 날려버린 시간: {getSumPlaytimeText(monthlySumPlaytime)}</div>
+        <>
+          {/* <div className="wasted_time_text">
+            이달의 날려버린 시간: {getSumPlaytimeText(monthlySumPlaytime)}
+          </div> */}
           <Calendar
             year={year}
             month={month}
             onClickPrev={onClickPrev}
             onClickNext={onClickNext}
             dailyMatchStatByDayOfMonth={dailyMatchStatByDayOfMonth} />
-        </div>
+        </>
       )}
-    </div>
+    </>
   );
 }
 

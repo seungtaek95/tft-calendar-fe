@@ -1,3 +1,5 @@
+import './Calendar.css';
+
 import DateUtil from "../util/DateUtil";
 import * as StatUtil from "../util/StatUtil";
 import DateTableBody from "./DateTableBody";
@@ -40,14 +42,18 @@ function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOf
   }
 
   return (
-    <>
-      <div>
-        {now.year}
+    <div className="calendar_container">
+      <div className="calendar_header">
+        <div className="calendar_year_text">
+          {now.year}
+        </div>
+        <div className="calendar_month_container">
+          <PrevButton onClick={onClickPrev}/>
+            <div className="calendar_month_text">{now.month}</div>
+          <NextButton onClick={onClickNext}/>
+        </div>
       </div>
-      <div>
-        <PrevButton onClick={onClickPrev}/>{now.month}<NextButton onClick={onClickNext}/>
-      </div>
-      <table>
+      <table className='calendar_table'>
         <thead>
           <tr>
             {dateTexts.map(dateText => <th key={dateText}>{dateText}</th>)}
@@ -57,7 +63,7 @@ function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOf
           {renderCalendarBody()}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
 

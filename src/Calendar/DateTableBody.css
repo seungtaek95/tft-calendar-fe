@@ -1,6 +1,10 @@
+.calendarCellContainer {
+  padding: 2px;
+}
+
 .calendarCell {
-  width: 100px;
-  height: 80px;
+  border-radius: 8px;
+  height: 100%;
 }
 
 .calendarCellDayText {

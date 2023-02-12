@@ -1,3 +1,5 @@
+import './Header.css';
+
 import { useRef } from "react";
 
 function Header() {
@@ -19,9 +21,13 @@ function Header() {
   }
 
   return (
-    <div>
-      <input ref={summonerNameInputRef} onKeyDown={onKeyDown} type="text"/>
-      <button onClick={searchSummoner}>검색</button>
+    <div className="header">
+      <div className="header_container">
+        <div className="header_search_container">
+          <input className="summoner_name_input" ref={summonerNameInputRef} onKeyDown={onKeyDown} type="text"/>
+          <button className="search_name_button" onClick={searchSummoner}>검색</button>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,3 +1,5 @@
+import './Summoner.css';
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
@@ -26,31 +28,33 @@ function Summoner() {
         setIsLoading(false);
         setIsFailed(true);
       });
-  }, []);
+  }, [summonerName]);
 
   if (isLoading || isFailed) {
     return (
-      <div>
+      <>
         <Header />
-        {isLoading && <div>Loading...</div>}
-        {isFailed && (
-          <div>
-            <p>소환사 정보를 가져오는데 실패했습니다ㅠ</p>
-            <p>{summonerName}</p>
-          </div>
-        )}
-      </div>
+        <div className="summoner_container">
+          {isLoading && <div>Loading...</div>}
+          {isFailed && (
+            <div>
+              <p>소환사 정보를 가져오는데 실패했습니다ㅠ</p>
+              <p>{summonerName}</p>
+            </div>
+          )}
+        </div>
+      </>
     );
   }
 
-  console.log(summonerView);
-
   return (
-    <div>
+    <>
       <Header />
-      <SummonerInfo summonerView={summonerView} />
-      <SummonerStat summonerView={summonerView} />
-    </div>
+      <div className="summoner_container">
+        <SummonerInfo summonerView={summonerView} />
+        <SummonerStat summonerView={summonerView} />
+      </div>
+    </>
   );
 }
 

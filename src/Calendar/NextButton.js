@@ -1,6 +1,8 @@
+import './NextButton.css';
+
 function NextButton({ onClick }) {
   return (
-    <button onClick={onClick}>&gt;</button>
+    <button className="next_button" onClick={onClick}>&gt;</button>
   )
 }
 

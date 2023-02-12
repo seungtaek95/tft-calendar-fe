@@ -1,0 +1,29 @@
+.header {
+  background-color: #202020;
+}
+
+.header_container {
+  text-align: right;
+  width: 700px;
+  margin: 0 auto;
+}
+
+.header_search_container {
+  padding: 10px 0px 10px 0px;
+}
+
+.header .summoner_name_input {
+  width: 200px;
+  height: 20px;
+  font-size: 14px;
+}
+
+.header .search_name_button {
+  height: 26px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: dimgray;
+  cursor: pointer;
+  margin-left: 5px;
+}
