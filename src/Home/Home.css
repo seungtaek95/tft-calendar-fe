@@ -1,0 +1,33 @@
+.home {
+  height: 100%;
+}
+
+.home_body {
+  width: 1080px;
+  margin: 0 auto;
+}
+
+.home .home_logo_container {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.home .home_logo {
+  display: block;
+  margin: 0 auto;
+}
+
+.home .search_name_container {
+  display: flex;
+  justify-content: center;
+}
+
+.home .summoner_name_input {
+  width: 400px;
+  height: 30px;
+  font-size: 20px;
+}
+
+.home .search_name_button {
+  height: 36px;
+}

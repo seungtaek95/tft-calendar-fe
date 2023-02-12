@@ -1,3 +1,5 @@
+import './Home.css';
+
 import { useRef } from 'react';
 
 function Home() {
@@ -19,9 +21,16 @@ function Home() {
   }
 
   return (
-    <div>
-      <input ref={summonerNameInputRef} onKeyDown={onKeyDown} type="text"/>
-      <button onClick={searchSummoner}>검색</button>
+    <div className='home'>
+      <div className='home_body'>
+        <div className='home_logo_container'>
+          <img className='home_logo' src='./home_logo.png' alt='home logo' />
+        </div>
+        <div className='search_name_container'>
+          <input className='summoner_name_input' ref={summonerNameInputRef} onKeyDown={onKeyDown} type="text"/>
+          <button className='search_name_button' onClick={searchSummoner}>검색</button>
+        </div>
+      </div>
     </div>
   );
 }

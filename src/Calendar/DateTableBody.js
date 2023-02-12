@@ -1,6 +1,7 @@
+import './DateTableBody.css'; 
+
 import { useState } from 'react';
 import DailyStatTooltip from './DailyStatTooltip';
-import './DateTableBody.css'; 
 
 function DateTableBody({ dayOfMonth, dailyMatchStatView }) {
   const [showTooltip, setShowTooltip] = useState(false);
