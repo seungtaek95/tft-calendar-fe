@@ -8,24 +8,21 @@ import SummonerStat from "./SummonerStat";
 
 function Summoner() {  
   const { summonerName } = useParams();
-  const [lastFetchedAt, setLastFetchedAt] = useState(null);
+  const [summonerView, setSummonerView] = useState(null);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isFailed, setIsFailed] = useState(false);
 
+  // 소환사 이름으로 소환사 정보 조회
   useEffect(() => {
     async function fetchSummoner() {
       const summonerView = await searchSummoner(summonerName);
       setIsLoading(false);
-
-      if (summonerView.lastFetchedAt) {
-        setLastFetchedAt(new Date(summonerView.lastFetchedAt));
-      }
+      setSummonerView(summonerView);
     }
 
     fetchSummoner()
       .catch(e => {
-        console.error(e);
         setIsLoading(false);
         setIsFailed(true);
       });
@@ -46,11 +43,13 @@ function Summoner() {
     );
   }
 
+  console.log(summonerView);
+
   return (
     <div>
       <Header />
-      <SummonerInfo summonerName={summonerName} lastFetchedAt={lastFetchedAt} />
-      <SummonerStat summonerName={summonerName} lastFetchedAt={lastFetchedAt} />
+      <SummonerInfo summonerView={summonerView} />
+      <SummonerStat summonerView={summonerView} />
     </div>
   );
 }
