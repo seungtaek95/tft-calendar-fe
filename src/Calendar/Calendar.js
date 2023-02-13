@@ -1,4 +1,5 @@
 import './Calendar.css';
+import './PrevNextButton.css';
 
 import DateUtil from "../util/DateUtil";
 import * as StatUtil from "../util/StatUtil";
@@ -11,6 +12,7 @@ const dateTexts = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOfMonth }) {
   const now = new DateUtil(year, month);
   const lastDayOfMonth = now.lastDayOfMonth;
+  const disableNextButton = now.year === new Date().getFullYear() && now.month === new Date().getMonth() + 1;
 
   const renderCalendarBody = () => {
     const elems = [];
@@ -50,7 +52,7 @@ function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOf
         <div className="calendar_month_container">
           <PrevButton onClick={onClickPrev}/>
             <div className="calendar_month_text">{now.month}</div>
-          <NextButton onClick={onClickNext}/>
+          <NextButton disable={disableNextButton} onClick={onClickNext}/>
         </div>
       </div>
       <table className='calendar_table'>

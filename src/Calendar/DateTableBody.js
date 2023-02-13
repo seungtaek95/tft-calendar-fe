@@ -1,4 +1,4 @@
-import './DateTableBody.css'; 
+import './DateTableBody.css';
 
 import { useState } from 'react';
 import DailyStatTooltip from './DailyStatTooltip';
