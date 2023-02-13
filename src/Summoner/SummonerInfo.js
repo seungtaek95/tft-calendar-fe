@@ -25,7 +25,7 @@ function SummonerInfo({ summonerView }) {
 
   return (
     <div className="summoner_info_container">
-      <img className="summoner_info_profile_icon_img" src={`https://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/${summonerView.profileIconId}.png`} alt="profile_icon" />
+      <img className="summoner_info_profile_icon_img" src={`http://ddragon.leagueoflegends.com/cdn/13.3.1/img/profileicon/${summonerView.profileIconId}.png`} alt="profile_icon" />
       <div className="summoner_info_name_renew_container">
         <div className="summoner_info_name_text">
           {summonerView.name}

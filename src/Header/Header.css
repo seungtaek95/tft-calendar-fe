@@ -3,9 +3,15 @@
 }
 
 .header_container {
-  text-align: right;
-  width: 700px;
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
   margin: 0 auto;
+}
+
+.header_logo {
+  height: 50px;
+  cursor: pointer;
 }
 
 .header_search_container {
@@ -14,16 +20,20 @@
 
 .header .summoner_name_input {
   width: 200px;
-  height: 20px;
+  height: 25px;
+  padding: 0px 10px 0px 10px;
+  border-radius: 5px;
+  border: none;
   font-size: 14px;
 }
 
 .header .search_name_button {
   height: 26px;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
   color: white;
-  background-color: dimgray;
+  background-color: rgb(105, 105, 105);
   cursor: pointer;
-  margin-left: 5px;
+  margin-left: 6px;
 }

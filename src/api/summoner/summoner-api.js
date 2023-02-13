@@ -1,4 +1,6 @@
-const baseUrl = "http://localhost/api/summoners";
+import { HOST } from "../../constant/constant";
+
+const baseUrl = `${HOST}/api/summoners`;
 
 export async function searchSummoner(summonerName) {
   const res = await fetch(`${baseUrl}/${summonerName}/search`, { method: 'POST' });

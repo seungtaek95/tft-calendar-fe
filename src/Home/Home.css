@@ -8,13 +8,14 @@
 }
 
 .home .home_logo_container {
-  padding-top: 40px;
+  padding-top: 80px;
   padding-bottom: 40px;
 }
 
 .home .home_logo {
   display: block;
   margin: 0 auto;
+  height: 200px;
 }
 
 .home .search_name_container {
@@ -24,10 +25,22 @@
 
 .home .summoner_name_input {
   width: 400px;
-  height: 30px;
+  height: 34px;
+  padding: 0px 10px 0px 10px;
+  border-radius: 8px;
+  border: none;
   font-size: 20px;
 }
 
 .home .search_name_button {
   height: 36px;
+  width: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(105, 105, 105);
+  cursor: pointer;
+  margin-left: 5px;
 }
