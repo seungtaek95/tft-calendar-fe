@@ -9,17 +9,18 @@ function SummonerInfo({ summonerView }) {
       .then(res => {
         switch (res.matchRenewResultStatus) {
           case 'QUEUED':
-            return alert("매치 갱신 큐에 등록되었습니다. 1시간까지 걸릴 수 있습니다.");
+            alert("매치 갱신 큐에 등록되었습니다. 1시간까지 걸릴 수 있습니다.");
+            return window.location.reload();
           case 'ALREADY_PROCESSING':
             return alert("이미 갱신 큐에 등록되어있습니다. 기다려주세요.");
           case 'RECENTLY_RENEWED':
             return alert("최근에 갱신을 시도하였습니다. 잠시 후 다시 시도해주세요.");
           default:
-            return alert("알 수 없는 문제가 발생했습니다.")
+            return alert("알 수 없는 문제가 발생했습니다.");
         }
       })
       .catch(e => {
-        alert("갱신에 실패하였습니다.")
+        alert("갱신에 실패하였습니다.");
       });
   }
 
@@ -31,7 +32,9 @@ function SummonerInfo({ summonerView }) {
           {summonerView.name}
         </div>
         <div>
-          <button className="renew_button" onClick={onClickRenew}>통계 갱신</button>
+          {summonerView.isRenewProcessing
+              ? <button className="disabled_renew_button">통계 갱신중</button>
+              : <button className="renew_button" onClick={onClickRenew}>통계 갱신</button>}
           {summonerView.lastFetchedAt && `마지막 갱신: ${getLastFetchedAtText(summonerView.lastFetchedAt)}`}
         </div>
       </div>

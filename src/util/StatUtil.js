@@ -38,7 +38,7 @@ export function getRgbString(playtimeInSeconds) {
   } else if (playtimeInSeconds < FIVE_HOUR) {
     return "#BB4455";
   } else if (playtimeInSeconds < SIX_HOUR) {
-    return "CC5566";
+    return "#CC5566";
   } else if (playtimeInSeconds < EIGHT_HOUR) {
     return "#FF7788"
   }

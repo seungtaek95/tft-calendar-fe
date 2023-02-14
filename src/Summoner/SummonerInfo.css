@@ -21,7 +21,8 @@
 }
 
 .summoner_info_name_text {
-  font-size: 40px;
+  font-size: 38px;
+  font-weight: bold;
 }
 
 .renew_button {
@@ -29,10 +30,22 @@
   width: 80px;
   margin-right: 10px;
   border-radius: 5px;
-  cursor: pointer;
   background-color: #AA2233;
   border: none;
+  cursor: pointer;
   color: white;
+  font-weight: bold;
+}
+
+.disabled_renew_button {
+  height: 40px;
+  width: 80px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: rgb(70, 70, 70);
+  border: none;
+  color: gray;
+  font-weight: bold;
 }
 
 .renew_button:hover {

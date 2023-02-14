@@ -3,7 +3,7 @@ import './Summoner.css';
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import { searchSummoner } from "../api/summoner/summoner-api";
+import { findSummoner } from "../api/summoner/summoner-api";
 import Header from "../Header/Header";
 import SummonerInfo from "./SummonerInfo";
 import SummonerStat from "./SummonerStat";
@@ -18,7 +18,7 @@ function Summoner() {
   // 소환사 이름으로 소환사 정보 조회
   useEffect(() => {
     async function fetchSummoner() {
-      const summonerView = await searchSummoner(summonerName);
+      const summonerView = await findSummoner(summonerName);
       setIsLoading(false);
       setSummonerView(summonerView);
     }
