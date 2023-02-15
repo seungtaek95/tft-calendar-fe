@@ -1,7 +1,7 @@
 import './Header.css';
 
 import { useRef } from "react";
-import { HOST } from '../constant/constant';
+import { ENV } from '../constant/constant';
 
 function Header() {
   const summonerNameInputRef = useRef(null);
@@ -28,7 +28,7 @@ function Header() {
   return (
     <div className="header">
       <div className="header_container">
-        <img className='header_logo' src={`${HOST}/home_logo.svg`} alt='header logo' onClick={onClickHeaderLogo}/>
+        <img className='header_logo' src={`${ENV.host}/home_logo.svg`} alt='header logo' onClick={onClickHeaderLogo}/>
         <div className="header_search_container">
           <input className="summoner_name_input" ref={summonerNameInputRef} onKeyDown={onKeyDown} type="text"/>
           <button className="search_name_button" onClick={searchSummoner}>검색</button>

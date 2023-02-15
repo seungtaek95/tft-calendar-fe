@@ -1,6 +1,6 @@
-import { HOST } from "../../constant/constant";
+import { ENV } from "../../constant/constant";
 
-const baseUrl = `${HOST}/api/summoners`;
+const baseUrl = `${ENV.host}/api/summoners`;
 
 export async function findSummoner(summonerName) {
   const res = await fetch(`${baseUrl}/${summonerName}`, { method: 'GET' });

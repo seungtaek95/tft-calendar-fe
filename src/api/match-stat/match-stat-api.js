@@ -1,6 +1,6 @@
-import { HOST } from "../../constant/constant";
+import { ENV } from "../../constant/constant";
 
-const baseUrl = `${HOST}/api/match-stats`;
+const baseUrl = `${ENV.host}/api/match-stats`;
 
 export async function getMonthlyMatchStat(summonerName, year, month) {
   const res = await fetch(`${baseUrl}/summoner/${summonerName}/monthly?year=${year}&month=${month}`);

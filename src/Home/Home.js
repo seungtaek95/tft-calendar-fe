@@ -1,7 +1,7 @@
 import './Home.css';
 
 import { useRef } from 'react';
-import { HOST } from '../constant/constant';
+import { ENV } from '../constant/constant';
 
 function Home() {
   const summonerNameInputRef = useRef(null);
@@ -25,7 +25,7 @@ function Home() {
     <div className='home'>
       <div className='home_body'>
         <div className='home_logo_container'>
-          <img className='home_logo' src={`${HOST}/home_logo.svg`} alt='home logo' />
+          <img className='home_logo' src={`${ENV.host}/home_logo.svg`} alt='home logo' />
         </div>
         <div className='search_name_container'>
           <input className='summoner_name_input' ref={summonerNameInputRef} onKeyDown={onKeyDown} type="text"/>
