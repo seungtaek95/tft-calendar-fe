@@ -20,6 +20,7 @@ function Home() {
       searchSummoner();
     }
   }
+  console.log(ENV);
 
   return (
     <div className='home'>
