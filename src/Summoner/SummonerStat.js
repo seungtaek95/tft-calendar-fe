@@ -5,22 +5,35 @@ import { useEffect, useState } from "react";
 import Calendar from "../Calendar/Calendar";
 import { getMonthlyMatchStat } from "../api/match-stat/match-stat-api";
 import { getSumPlaytimeText } from "../util/StatUtil";
+import { getFromCache, saveCache } from '../util/CacheUtil';
+import DateUtil from '../util/DateUtil';
 
-const now = new Date();
+const now = new DateUtil();
+const targetDate = new DateUtil();
 
 function SummonerStat({ summonerView }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isFailed, setIsFailed] = useState(false);
 
-  const [year, setYear] = useState(now.getFullYear());
-  const [month, setMonth] = useState(now.getMonth());
+  const [year, setYear] = useState(targetDate.year);
+  const [month, setMonth] = useState(targetDate.month);
   const [monthlySumPlaytime, setMonthlySumPlaytime] = useState(0);
   const [dailyMatchStatByDayOfMonth, setDailyMatchStatByDayOfMonth] = useState(null);
 
   // 소환사의 월간 매치 통계 조회
   useEffect(() => {
+    // 캐시에 있으면 캐시 사용. 없으면 조회 후 캐싱
     async function fetchMonthlyStat() {
-      const monthlyMatchStat = await getMonthlyMatchStat(summonerView.name, year, month + 1);
+      const isCacheExist = !!getFromCache(summonerView.puuid, year, month);
+
+      const monthlyMatchStat = isCacheExist
+        ? getFromCache(summonerView.puuid, year, month)
+        : await getMonthlyMatchStat(summonerView.name, year, month);
+
+      // 현재 년월 데이터가 아닌 경우에만 캐싱
+      if (!isCacheExist && (now.year !== targetDate.year || now.month !== targetDate.month)) {
+        saveCache(summonerView.puuid, monthlyMatchStat);
+      }
 
       setIsLoading(false);
       setMonthlySumPlaytime(
@@ -38,6 +51,7 @@ function SummonerStat({ summonerView }) {
       setIsLoading(true);
       fetchMonthlyStat()
         .catch(e => {
+          console.error(e);
           setIsLoading(false);
           setIsFailed(true);
         });
@@ -47,17 +61,17 @@ function SummonerStat({ summonerView }) {
   }, [summonerView, year, month]);
 
   const onClickPrev = () => {
-    now.setMonth(now.getMonth() - 1);
-    setYear(now.getFullYear());
-    setMonth(now.getMonth());
+    targetDate.minusMonth();
+    setYear(targetDate.year);
+    setMonth(targetDate.month);
     setIsLoading(true);
     setDailyMatchStatByDayOfMonth(null);
   }
 
   const onClickNext = () => {
-    now.setMonth(now.getMonth() + 1);
-    setYear(now.getFullYear());
-    setMonth(now.getMonth());
+    targetDate.plusMonth();
+    setYear(targetDate.year);
+    setMonth(targetDate.month);
     setIsLoading(true);
     setDailyMatchStatByDayOfMonth(null);
   }

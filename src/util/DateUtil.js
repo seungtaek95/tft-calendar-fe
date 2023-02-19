@@ -1,12 +1,12 @@
 export default class DateUtil {
   constructor(year, month) {
     if (year && month !== null) {
-      this.currentDate = new Date(year, month, 1);
+      this.currentDate = new Date(year, month - 1, 1);
     } else if (year) {
       this.currentDate = new Date(year);
     } else if (month) {
       this.currentDate = new Date();
-      this.currentDate.setMonth(month);
+      this.currentDate.setMonth(month - 1);
     } else {
       this.currentDate = new Date();
     }
