@@ -1,7 +1,15 @@
+.summoner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 20px;
+}
+
 .summoner_container {
   display: flex;
   flex-direction: column;
+  gap: 20px;
+  flex: 1;
   width: 700px;
-  height: 100%;
   margin: 0 auto;
 }

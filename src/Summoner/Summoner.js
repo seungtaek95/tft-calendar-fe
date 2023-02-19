@@ -7,6 +7,7 @@ import { searchSummoner } from "../api/summoner/summoner-api";
 import Header from "../Header/Header";
 import SummonerInfo from "./SummonerInfo";
 import SummonerStat from "./SummonerStat";
+import Footer from '../Footer/Footer';
 
 function Summoner() {  
   const { summonerName } = useParams();
@@ -43,18 +44,20 @@ function Summoner() {
             </div>
           )}
         </div>
+        <Footer />
       </>
     );
   }
 
   return (
-    <>
+    <div className="summoner">
       <Header />
       <div className="summoner_container">
         <SummonerInfo summonerView={summonerView} />
         <SummonerStat summonerView={summonerView} />
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }
 

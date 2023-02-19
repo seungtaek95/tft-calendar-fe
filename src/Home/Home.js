@@ -2,6 +2,7 @@ import './Home.css';
 
 import { useRef } from 'react';
 import { ENV } from '../constant/constant';
+import Footer from '../Footer/Footer';
 
 function Home() {
   const summonerNameInputRef = useRef(null);
@@ -33,6 +34,7 @@ function Home() {
           <button className='search_name_button' onClick={searchSummoner}>검색</button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

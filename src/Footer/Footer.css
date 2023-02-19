@@ -1,0 +1,13 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #202020;
+  height: 150px;
+  text-align: center;
+}
+
+.footer_container {
+  color: gray;
+}
