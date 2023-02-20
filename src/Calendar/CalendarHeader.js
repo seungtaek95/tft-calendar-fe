@@ -23,7 +23,7 @@ function CalendarHeader({ year, month, onClickPrev, onClickNext, monthlyPlaytime
       <div className="monthly_playtime_container">
         {monthlyPlaytimeText && (
           <>
-            <span>이번달 체스에 바친 시간</span>
+            <span>이 달에 체스에 바친 시간</span>
             <br/>
             <span className="monthly_playtime_text">{monthlyPlaytimeText}</span>
           </>

@@ -26,35 +26,31 @@ function Summoner() {
 
     fetchSummoner()
       .catch(e => {
+        console.error(e);
         setIsLoading(false);
         setIsFailed(true);
       });
   }, [summonerName]);
 
-  if (isLoading || isFailed) {
-    return (
-      <>
-        <Header />
-        <div className="summoner_container">
-          {isLoading && <div>Loading...</div>}
-          {isFailed && (
-            <div>
-              <p>소환사 정보를 가져오는데 실패했습니다ㅠ</p>
-              <p>{summonerName}</p>
-            </div>
-          )}
-        </div>
-        <Footer />
-      </>
-    );
-  }
-
   return (
     <div className="summoner">
       <Header />
       <div className="summoner_container">
-        <SummonerInfo summonerView={summonerView} />
-        <SummonerStat summonerView={summonerView} />
+        {isLoading && (
+          <div>Loading...</div>
+        )}
+        {isFailed && (
+          <div>
+            <p>소환사 정보를 가져오는데 실패했습니다ㅠ</p>
+            <p>{summonerName}</p>
+          </div>
+        )}
+        {!isLoading && !isFailed && (
+          <>
+            <SummonerInfo summonerView={summonerView} />
+            <SummonerStat summonerView={summonerView} />
+          </>
+        )}
       </div>
       <Footer />
     </div>
