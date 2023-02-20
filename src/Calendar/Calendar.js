@@ -4,18 +4,16 @@ import './PrevNextButton.css';
 import DateUtil from "../util/DateUtil";
 import * as StatUtil from "../util/StatUtil";
 import DateTableBody from "./DateTableBody";
-import NextButton from "./NextButton";
-import PrevButton from "./PrevButton";
+import CalendarHeader from './CalendarHeader';
 
 const dateTexts = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOfMonth }) {
+function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOfMonth, monthlyPlaytimeText }) {
   const now = new DateUtil(year, month);
   const lastDayOfMonth = now.lastDayOfMonth;
-  const disableNextButton = now.year === new Date().getFullYear() && now.month === new Date().getMonth() + 1;
 
-  const renderCalendarBody = () => {
-    const elems = [];
+  const renderCalendarTableBody = () => {
+    const bodyRows = [];
     let dayOfMonth = 1 - now.firstDay;
 
     // 주별로
@@ -33,37 +31,30 @@ function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOf
         dayOfMonth++;
       }
 
-      elems.push(<tr key={`${month}-${week}`}>{tds}</tr>);
+      bodyRows.push(<tr key={`${month}-${week}`}>{tds}</tr>);
 
       if (dayOfMonth > lastDayOfMonth) {
         break;
       }
     }
 
-    return elems;
+    return (
+      <tbody>
+        {bodyRows}
+      </tbody>
+    )
   }
 
   return (
     <div className="calendar_container">
-      <div className="calendar_header">
-        <div className="calendar_year_text">
-          {now.year}
-        </div>
-        <div className="calendar_month_container">
-          <PrevButton onClick={onClickPrev}/>
-            <div className="calendar_month_text">{now.month}</div>
-          <NextButton disable={disableNextButton} onClick={onClickNext}/>
-        </div>
-      </div>
+      <CalendarHeader year={year} month={month} onClickPrev={onClickPrev} onClickNext={onClickNext} monthlyPlaytimeText={monthlyPlaytimeText} />
       <table className='calendar_table'>
         <thead>
           <tr>
             {dateTexts.map(dateText => <th key={dateText}>{dateText}</th>)}
           </tr>
         </thead>
-        <tbody>
-          {renderCalendarBody()}
-        </tbody>
+        {renderCalendarTableBody()}
       </table>
     </div>
   );

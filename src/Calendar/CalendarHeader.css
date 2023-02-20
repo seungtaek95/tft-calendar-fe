@@ -1,0 +1,43 @@
+.calendar_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar_header_empty {
+  width: 33%;
+}
+
+.calendar_header_center {
+  text-align: center;
+  width: 33%;
+}
+
+.calendar_year_text {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.calendar_month_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.calendar_month_text {
+  font-size: 28px;
+  font-weight: bold;
+  width: 60px;
+}
+
+.monthly_playtime_container {
+  width: 33%;
+  text-align: right;
+  margin: 10px 0px 10px 0px;
+  padding-right: 10px;
+}
+
+.monthly_playtime_text {
+  font-size: 20px;
+  font-weight: bold;
+}

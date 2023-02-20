@@ -17,7 +17,7 @@ function SummonerStat({ summonerView }) {
 
   const [year, setYear] = useState(targetDate.year);
   const [month, setMonth] = useState(targetDate.month);
-  const [monthlySumPlaytime, setMonthlySumPlaytime] = useState(0);
+  const [monthlyPlaytimeText, setMonthlyPlaytimeText] = useState(null);
   const [dailyMatchStatByDayOfMonth, setDailyMatchStatByDayOfMonth] = useState(null);
 
   // 소환사의 월간 매치 통계 조회
@@ -36,8 +36,8 @@ function SummonerStat({ summonerView }) {
       }
 
       setIsLoading(false);
-      setMonthlySumPlaytime(
-        monthlyMatchStat.dailyMatchStats.reduce((acc, dailyMatchStat) => acc += dailyMatchStat.playtimeInSeconds, 0)
+      setMonthlyPlaytimeText(
+        getSumPlaytimeText(monthlyMatchStat.dailyMatchStats.reduce((acc, dailyMatchStat) => acc += dailyMatchStat.playtimeInSeconds, 0))
       );
       setDailyMatchStatByDayOfMonth(
         monthlyMatchStat.dailyMatchStats.reduce((dailyMatchStatByDayOfMonth, dailyMatchStat) => {
@@ -89,17 +89,13 @@ function SummonerStat({ summonerView }) {
     <>
       {!summonerView.lastFetchedAt && <div>통계정보가 없는 소환사입니다!</div>}
       {summonerView.lastFetchedAt && (
-        <>
-          {/* <div className="wasted_time_text">
-            이달의 날려버린 시간: {getSumPlaytimeText(monthlySumPlaytime)}
-          </div> */}
-          <Calendar
-            year={year}
-            month={month}
-            onClickPrev={onClickPrev}
-            onClickNext={onClickNext}
-            dailyMatchStatByDayOfMonth={dailyMatchStatByDayOfMonth} />
-        </>
+        <Calendar
+          year={year}
+          month={month}
+          onClickPrev={onClickPrev}
+          onClickNext={onClickNext}
+          dailyMatchStatByDayOfMonth={dailyMatchStatByDayOfMonth}
+          monthlyPlaytimeText={monthlyPlaytimeText} />
       )}
     </>
   );
