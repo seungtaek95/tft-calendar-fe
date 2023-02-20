@@ -24,7 +24,8 @@ function SummonerStat({ summonerView }) {
   useEffect(() => {
     // 캐시에 있으면 캐시 사용. 없으면 조회 후 캐싱
     async function fetchMonthlyStat() {
-      const isCacheExist = !!getFromCache(summonerView.puuid, year, month);
+      // const isCacheExist = !!getFromCache(summonerView.puuid, year, month);
+      const isCacheExist = false;
 
       const monthlyMatchStat = isCacheExist
         ? getFromCache(summonerView.puuid, year, month)
