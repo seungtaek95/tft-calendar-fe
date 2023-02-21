@@ -33,6 +33,9 @@ function Home() {
           <input className='summoner_name_input' ref={summonerNameInputRef} onKeyDown={onKeyDown} type="text"/>
           <button className='search_name_button' onClick={searchSummoner}>검색</button>
         </div>
+        <div className='sample_user_text'>
+          sample: <a className='sample_user_tag' href='/summoner/쨍 이'>쨍 이</a> <a className='sample_user_tag' href='/summoner/토쟁이는한강으로'>토쟁이는한강으로</a> <a className='sample_user_tag' href='/summoner/안녕안녕나는유미'>안녕안녕나는유미</a>
+        </div>
       </div>
       <Footer />
     </div>

@@ -48,3 +48,13 @@
   cursor: pointer;
   margin-left: 5px;
 }
+
+.sample_user_text {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.sample_user_tag {
+  margin-left: 10px;
+  color: white;
+}
