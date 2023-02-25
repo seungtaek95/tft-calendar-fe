@@ -5,12 +5,16 @@ import DateUtil from "../util/DateUtil";
 import * as StatUtil from "../util/StatUtil";
 import DateTableBody from "./DateTableBody";
 import CalendarHeader from './CalendarHeader';
+import DimmedLayer from '../common/DimmedLayer';
+import { useRef } from 'react';
 
 const dateTexts = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOfMonth, monthlyPlaytimeText }) {
+function Calendar({ isLoading, year, month, onClickPrev, onClickNext, dailyMatchStatByDayOfMonth, monthlyPlaytimeText }) {
   const now = new DateUtil(year, month);
   const lastDayOfMonth = now.lastDayOfMonth;
+
+  const calenderContainerRef = useRef(null);
 
   const renderCalendarTableBody = () => {
     const bodyRows = [];
@@ -46,7 +50,8 @@ function Calendar({ year, month, onClickPrev, onClickNext, dailyMatchStatByDayOf
   }
 
   return (
-    <div className="calendar_container">
+    <div className="calendar_container" ref={calenderContainerRef}>
+      {isLoading && <DimmedLayer width={calenderContainerRef.current?.clientWidth || 0} height={calenderContainerRef.current?.clientHeight || 0} />}
       <CalendarHeader year={year} month={month} onClickPrev={onClickPrev} onClickNext={onClickNext} monthlyPlaytimeText={monthlyPlaytimeText} />
       <table className='calendar_table'>
         <thead>
