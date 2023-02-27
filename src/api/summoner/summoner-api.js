@@ -10,7 +10,7 @@ export async function findSummoner(summonerName) {
     throw body;
   }
   
-  body.lastFetchedAt = new Date(body.lastFetchedAt);
+  body.lastManualRenewedAt = new Date(body.lastManualRenewedAt);
   return body;
 }
 
@@ -22,7 +22,7 @@ export async function searchSummoner(summonerName) {
     throw body;
   }
   
-  body.lastFetchedAt = new Date(body.lastFetchedAt);
+  body.lastManualRenewedAt = new Date(body.lastManualRenewedAt);
   return body;
 }
 

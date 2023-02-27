@@ -51,7 +51,7 @@ function SummonerStat({ summonerView }) {
   }
 
   useEffect(() => {
-    if (summonerView.lastFetchedAt) {
+    if (summonerView.lastManualRenewedAt) {
       setIsLoading(true);
       fetchMonthlyStat(targetDate.year, targetDate.month)
         .catch(e => {
@@ -89,8 +89,8 @@ function SummonerStat({ summonerView }) {
   return (
     <>
       {isFailed && <div>통계정보를 가져오는데 실패했습니다ㅠ</div>}
-      {!summonerView.lastFetchedAt && <div>통계정보가 없는 소환사입니다!</div>}
-      {summonerView.lastFetchedAt && (
+      {!summonerView.lastManualRenewedAt && <div>통계정보가 없는 소환사입니다!</div>}
+      {summonerView.lastManualRenewedAt && (
         <Calendar
           isLoading={isLoading}
           year={year}

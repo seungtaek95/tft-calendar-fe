@@ -74,11 +74,11 @@ export function getDailyMatchStatView(dailyMatchStat) {
   }
 }
 
-export function getLastFetchedAtText(lastFetchedAt) {
-  const lastFetchedAtInMillis = lastFetchedAt.getTime();
+export function getLastRenewedAtText(lastRenewedAt) {
+  const lastRenewedAtInMillis = lastRenewedAt.getTime();
   const nowInMillis = new Date().getTime();
   
-  const offset = Math.ceil((nowInMillis - lastFetchedAtInMillis) / 1000);
+  const offset = Math.ceil((nowInMillis - lastRenewedAtInMillis) / 1000);
 
   if (offset < ONE_MINUTE) {
     return `몇 초 전`;

@@ -1,7 +1,7 @@
 import './SummonerInfo.css';
 
 import { renew } from "../api/summoner/summoner-api";
-import { getLastFetchedAtText } from "../util/StatUtil";
+import { getLastRenewedAtText } from "../util/StatUtil";
 
 function SummonerInfo({ summonerView }) {
   const onClickRenew = () => {
@@ -35,7 +35,7 @@ function SummonerInfo({ summonerView }) {
           {summonerView.isRenewProcessing
               ? <button className="disabled_renew_button">통계 갱신중</button>
               : <button className="renew_button" onClick={onClickRenew}>통계 갱신</button>}
-          {summonerView.lastFetchedAt && `마지막 갱신: ${getLastFetchedAtText(summonerView.lastFetchedAt)}`}
+          {summonerView.lastManualRenewedAt && `마지막 갱신: ${getLastRenewedAtText(summonerView.lastManualRenewedAt)}`}
         </div>
       </div>
     </div>
