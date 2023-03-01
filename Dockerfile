@@ -1,5 +1,5 @@
 FROM node:18 as build
-ARG REACT_APP_API_HOST
+ARG REACT_APP_HOST
 WORKDIR /app
 COPY . .
 RUN npm ci

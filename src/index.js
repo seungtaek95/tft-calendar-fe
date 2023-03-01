@@ -3,7 +3,7 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
 import Home from './Home/Home';
 import Summoner from './Summoner/Summoner';
@@ -11,13 +11,17 @@ import Summoner from './Summoner/Summoner';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
+    path: "/tft/summoner/:summonerName",
+    element: <Summoner />,
   },
   {
-    path: "/summoner/:summonerName",
-    element: <Summoner />,
-  }
+    path: "/tft",
+    element: <Home />
+  },
+  {
+    path: "/",
+    element: <Navigate to="/tft" />
+  },
 ]);
 
 root.render(
