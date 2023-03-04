@@ -16,7 +16,7 @@ function Header() {
   }
 
   const onClickHeaderLogo = () => {
-    window.location.href = "/";
+    window.location.href = "/tft";
   }
 
   const onKeyDown = (e) => {
