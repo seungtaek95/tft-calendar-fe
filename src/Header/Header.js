@@ -12,7 +12,7 @@ function Header() {
       return alert("소환사명을 입력하세요!");
     }
 
-    window.location.href = `/summoner/${summonerName}`;
+    window.location.href = `/tft/summoner/${summonerName}`;
   }
 
   const onClickHeaderLogo = () => {

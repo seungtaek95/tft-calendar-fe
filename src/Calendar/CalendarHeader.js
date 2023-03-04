@@ -4,8 +4,10 @@ import NextButton from './NextButton';
 import PrevButton from './PrevButton';
 
 function CalendarHeader({ year, month, onClickPrev, onClickNext, monthlyPlaytimeText }) {
+  const disablePrevButton = year === 2023 && month === 1;
   const disableNextButton = year === new Date().getFullYear() && month === new Date().getMonth() + 1;
 
+  console.log(disablePrevButton);
   return (
     <div className="calendar_header">
       <div className="calendar_header_empty">
@@ -15,7 +17,7 @@ function CalendarHeader({ year, month, onClickPrev, onClickNext, monthlyPlaytime
           {year}
         </div>
         <div className="calendar_month_container">
-          <PrevButton onClick={onClickPrev}/>
+          <PrevButton disable={disablePrevButton} onClick={onClickPrev}/>
             <div className="calendar_month_text">{month}</div>
           <NextButton disable={disableNextButton} onClick={onClickNext}/>
         </div>
