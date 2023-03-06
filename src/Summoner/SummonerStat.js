@@ -86,9 +86,12 @@ function SummonerStat({ summonerView }) {
       });
   }
 
+  if (isFailed) {
+    return <div>통계정보를 가져오는데 실패했습니다ㅠ</div>;
+  }
+
   return (
     <>
-      {isFailed && <div>통계정보를 가져오는데 실패했습니다ㅠ</div>}
       {!summonerView.lastManualRenewedAt && <div>통계정보가 없는 소환사입니다!</div>}
       {summonerView.lastManualRenewedAt && (
         <Calendar
